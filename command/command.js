@@ -1,11 +1,11 @@
-const toDoAggregate = {
+const todoAggregate = {
     commands: [],
-    toDos: {},
+    todos: {},
     addToDo: (payload) => {
-        toDoAggregate.toDos[payload.id] = payload;
+        todoAggregate.todos[payload.id] = payload;
     },
     changeIsChecked: (payload) => {
-        toDoAggregate.toDos[payload.id] = payload;
+        todoAggregate.todos[payload.id] = payload;
     }, 
 };
 
@@ -13,7 +13,7 @@ const executeCommand = (command, aggregate, payload) => {
     const aggregateFunction = aggregate[command];
 
     if(aggregateFunction && typeof aggregateFunction === "function") {
-        toDoAggregate.commands.push({
+        todoAggregate.commands.push({
             command,
             payload,
         });
@@ -25,24 +25,24 @@ const executeCommand = (command, aggregate, payload) => {
     throw errorMessage;
 };
 
-executeCommand("addToDo", toDoAggregate, {
+executeCommand("addToDo", todoAggregate, {
     id: 1,
     isChecked: false,
 });
 
-executeCommand("changeIsChecked", toDoAggregate, {
+executeCommand("changeIsChecked", todoAggregate, {
     id: 1,
     isChecked: true,
 });
 
-executeCommand("changeIsChecked", toDoAggregate, {
+executeCommand("changeIsChecked", todoAggregate, {
     id: 1,
     isChecked: false,
 });
 
-executeCommand("changeIsChecked", toDoAggregate, {
+executeCommand("changeIsChecked", todoAggregate, {
     id: 1,
     isChecked: true,
 });
 
-console.log("executed commands: ", toDoAggregate.commands);
+console.log("executed commands: ", todoAggregate.commands);
